@@ -55,7 +55,7 @@ class DiaryApi:
     async def _post(self, cls: Type[types.ObjectType], endpoint: str, data: Optional[dict] = None) -> types.ObjectType:
         logger.debug(f"Request \"{endpoint}\" with data {data}")
         async with self._session.post(
-                f"https://sosh.mon-ra.ru/rest/{endpoint}",
+                f"https://schools48.ru/rest/{endpoint}",
                 data=data
         ) as r:
             json = await _check_response(r, self._session)
@@ -74,7 +74,7 @@ class DiaryApi:
             timeout=ClientTimeout(10)
         )
         async with session.get(
-                'https://sosh.mon-ra.ru/rest/login'
+                'https://schools48.ru/rest/login'
         ) as r:
             json = await _check_response(r, session)
             user = types.LoginObject.reformat(json)
@@ -89,7 +89,7 @@ class DiaryApi:
             timeout=ClientTimeout(10)
         )
         async with session.get(
-                f'https://sosh.mon-ra.ru/rest/login?'
+                f'https://schools48.ru/rest/login?'
                 f'login={login}&password={password}'
 
         ) as r:
@@ -154,7 +154,7 @@ class DiaryApi:
     async def check_food(self) -> types.CheckFoodObject:
         logger.debug("Request \"check_food\" with data None")
         async with self._session.post(
-                'https://sosh.mon-ra.ru/rest/check_food'
+                'https://schools48.ru/rest/check_food'
         ) as r:
             json = await _check_response(r, self._session)
             return types.CheckFoodObject.parse_obj(json)
